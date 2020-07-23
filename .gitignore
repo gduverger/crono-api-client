@@ -1,0 +1,5 @@
+.env
+.DS_Store
+build
+dist
+crono_api_client.egg-info
