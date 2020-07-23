@@ -1,4 +1,4 @@
-from crono import job as _job
+from crono_api_client import job as _job
 
 # Jobs
 
