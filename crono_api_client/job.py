@@ -20,31 +20,31 @@ class Job:
 			json = {'task': self.task, 'trigger': self.trigger}
 			response = requests.post(url, headers=self.headers, json=json)
 			self.uuid = response.json().get('uuid')
-			# TODO return self?
 			return response.json()
 		
 		return self
-
-	def delete(self):
-		url = f'{API_URL}/jobs/{self.uuid}'
-		response = requests.delete(url, headers=self.headers)
-		# TODO return self?
-		return response.json()
 
 	# Jobs
 
 	@classmethod
 	def jobs(cls):
 		url = f'{API_URL}/jobs'
-		response = requests.get(url, headers=self.headers)
-		# TODO cast into Job(s)?
+		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
+		response = requests.get(url, headers=headers)
 		return response.json()
 
 	@classmethod
 	def job(cls, uuid):
 		url = f'{API_URL}/jobs/{uuid}'
-		response = requests.get(url, headers=self.headers)
-		# TODO cast into Job?
+		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
+		response = requests.get(url, headers=headers)
+		return response.json()
+
+	@classmethod
+	def delete(cls, uuid):
+		url = f'{API_URL}/jobs/{uuid}'
+		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
+		response = requests.delete(url, headers=headers)
 		return response.json()
 
 	# Triggers

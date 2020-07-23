@@ -1,6 +1,5 @@
 # Jobs
-from .api import jobs, job
-from .job import Job
+from .api import jobs, job, delete
 
 # Tasks
 from .api import on, after, every, cron, at
