@@ -7,28 +7,24 @@
 
 ## How to
 
-Get all jobs
-
+Get all jobs:
 ```python
 job_uuids = crono.jobs()
 ```
 
-Get a job
-
+Get a job:
 ```python
 job_json = crono.job(<string:job_uuid>)
 ```
 
-Schedule a job
-
+Schedule a job:
 ```python
 job_uuid = crono.<task>(<args>, <kwargs>).<trigger>(<args>, <kwargs>)
 # or
 job_uuid = crono.<trigger>(<args>, <kwargs>).<task>(<args>, <kwargs>)
 ```
 
-Delete a job
-
+Delete a job:
 ```python
 job_uuid = crono.delete(<string:job_uuid>)
 ```
