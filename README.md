@@ -1,6 +1,6 @@
 # Crono API Client
 
-Python client for the 🔮 Crono API
+Python client for the 🔮 Crono API: https://crono.com/
 
 ```python
 >>> import crono_api_client as crono
