@@ -1,7 +1,7 @@
 import os
 import requests
 
-API_URL = os.getenv('CRONO_API_URL', 'https://api.crono.com')
+API_URL = os.getenv('CRONO_API_URL')
 API_KEY = os.getenv('CRONO_API_KEY')
 API_KEY_HEADER = 'X-API-Key'
 
@@ -38,7 +38,8 @@ class Job:
 		url = f'{API_URL}/jobs/{uuid}'
 		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
 		response = requests.get(url, headers=headers)
-		response.raise_for_status() # r.status_code == requests.codes.ok
+		# r.status_code == requests.codes.ok
+		response.raise_for_status()
 		return response.json()
 
 	@classmethod
@@ -46,8 +47,27 @@ class Job:
 		url = f'{API_URL}/jobs/{uuid}'
 		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
 		response = requests.delete(url, headers=headers)
-		response.raise_for_status() # r.status_code == requests.codes.ok
+		# r.status_code == requests.codes.ok
+		response.raise_for_status()
 		return response.json()
+
+	# Tasks
+
+	def log(self, *args, **kwargs):
+		self.task = {'name': 'log', 'args': args, 'kwargs': kwargs}
+		return self.send()
+
+	def request(self, *args, **kwargs):
+		self.task = {'name': 'request', 'args': args, 'kwargs': kwargs}
+		return self.send()
+
+	def message(self, *args, **kwargs):
+		self.tas = {'name': 'message', 'args': args, 'kwargs': kwargs}
+		return self.send()
+
+	def email(self, *args, **kwargs):
+		self.task = {'name': 'email', 'args': args, 'kwargs': kwargs}
+		return self.send()
 
 	# Triggers
 
@@ -69,22 +89,4 @@ class Job:
 
 	def at(self, *args, **kwargs):
 		self.trigger = {'name': 'at', 'args': args, 'kwargs': kwargs}
-		return self.send()
-
-	# Tasks
-
-	def log(self, *args, **kwargs):
-		self.task = {'name': 'log', 'args': args, 'kwargs': kwargs}
-		return self.send()
-
-	def request(self, *args, **kwargs):
-		self.task = {'name': 'request', 'args': args, 'kwargs': kwargs}
-		return self.send()
-
-	def message(self, *args, **kwargs):
-		self.tas = {'name': 'message', 'args': args, 'kwargs': kwargs}
-		return self.send()
-
-	def email(self, *args, **kwargs):
-		self.task = {'name': 'email', 'args': args, 'kwargs': kwargs}
 		return self.send()

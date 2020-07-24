@@ -2,7 +2,7 @@
 from .api import jobs, job, delete
 
 # Tasks
-from .api import on, after, every, cron, at
+from .api import log, request, message, email
 
 # Triggers
-from .api import log, request, message, email
+from .api import on, after, every, cron, at

@@ -11,6 +11,20 @@ def job(*args, **kwargs):
 def delete(*args, **kwargs):
 	return _job.Job.delete(*args, **kwargs)
 
+# Tasks
+
+def log(*args, **kwargs):
+	return _job.Job(task={'name': 'log', 'args': args, 'kwargs': kwargs})
+
+def request(*args, **kwargs):
+	return _job.Job(task={'name': 'request', 'args': args, 'kwargs': kwargs})
+
+def message(*args, **kwargs):
+	return _job.Job(task={'name': 'message', 'args': args, 'kwargs': kwargs})
+
+def email(*args, **kwargs):
+	return _job.Job(task={'name': 'email', 'args': args, 'kwargs': kwargs})
+
 # Triggers
 
 def on(*args, **kwargs):
@@ -27,17 +41,3 @@ def cron(*args, **kwargs):
 
 def at(*args, **kwargs):
 	return _job.Job(trigger={'name': 'at', 'args': args, 'kwargs': kwargs})
-
-# Tasks
-
-def log(*args, **kwargs):
-	return _job.Job(task={'name': 'log', 'args': args, 'kwargs': kwargs})
-
-def request(*args, **kwargs):
-	return _job.Job(task={'name': 'request', 'args': args, 'kwargs': kwargs})
-
-def message(*args, **kwargs):
-	return _job.Job(task={'name': 'message', 'args': args, 'kwargs': kwargs})
-
-def email(*args, **kwargs):
-	return _job.Job(task={'name': 'email', 'args': args, 'kwargs': kwargs})
