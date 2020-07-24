@@ -1,5 +1,7 @@
 # Crono API Client
 
+Python client for the 🔮 Crono API
+
 ```python
 >>> import crono_api_client as crono
 >>> crono.request('POST', https://your.app/').after(hours=42)
