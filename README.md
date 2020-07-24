@@ -8,31 +8,30 @@
 ## How to
 
 Install:
-```bash
+```console
 $ pip install crono_api_client
-$ python
 ```
 
 Get all jobs:
 ```python
-job_uuids = crono.jobs()
+>>> job_uuids = crono.jobs()
 ```
 
 Get a job:
 ```python
-job_json = crono.job(<string:job_uuid>)
+>>> job_json = crono.job(<string:job_uuid>)
 ```
 
 Schedule a job:
 ```python
-job_uuid = crono.<task>(<args>, <kwargs>).<trigger>(<args>, <kwargs>)
-# or
-job_uuid = crono.<trigger>(<args>, <kwargs>).<task>(<args>, <kwargs>)
+>>> job_uuid = crono.<task>(<args>, <kwargs>).<trigger>(<args>, <kwargs>)
+>>> # or
+>>> job_uuid = crono.<trigger>(<args>, <kwargs>).<task>(<args>, <kwargs>)
 ```
 
 Delete a job:
 ```python
-job_uuid = crono.delete(<string:job_uuid>)
+>>> job_uuid = crono.delete(<string:job_uuid>)
 ```
 
 ## Development
