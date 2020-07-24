@@ -14,6 +14,12 @@ Install:
 $ pip install crono_api_client
 ```
 
+Configure (in `.env`):
+```
+CRONO_API_URL=… 
+CRONO_API_KEY=…
+```
+
 Get all jobs:
 ```python
 >>> job_uuids = crono.jobs()
