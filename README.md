@@ -9,12 +9,12 @@ Python client for the 🔮 Crono API: https://crono.com/
 
 ## How to
 
-Install:
+Install package:
 ```console
 $ pip install crono_api_client
 ```
 
-Configure (in `.env`):
+Configure `.env` variables:
 ```
 CRONO_API_URL=… 
 CRONO_API_KEY=…
