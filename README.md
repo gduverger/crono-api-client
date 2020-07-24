@@ -1,11 +1,17 @@
 # Crono API Client
 
-	$ pip install crono_api_client
-	$ python
-	>>> import crono_api_client as crono
-	>>> crono.request('POST', https://your.app/').after(hours=42)
+```python
+>>> import crono_api_client as crono
+>>> crono.request('POST', https://your.app/').after(hours=42)
+```
 
 ## How to
+
+Install:
+```bash
+$ pip install crono_api_client
+$ python
+```
 
 Get all jobs:
 ```python
