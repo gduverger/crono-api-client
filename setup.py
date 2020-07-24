@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
 	name='crono-api-client',
-	version='0.1.6',
+	version='0.1.8',
 	author='Georges Duverger',
 	author_email='georges.duverger@gmail.com',
 	description='Crono API client',

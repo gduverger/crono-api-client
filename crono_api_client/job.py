@@ -19,7 +19,7 @@ class Job:
 			url = f'{API_URL}/jobs'
 			json = {'task': self.task, 'trigger': self.trigger}
 			response = requests.post(url, headers=self.headers, json=json)
-			self.uuid = response.json().get('uuid')
+			self.uuid = response.json()
 			return response.json()
 		
 		return self
@@ -38,6 +38,7 @@ class Job:
 		url = f'{API_URL}/jobs/{uuid}'
 		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
 		response = requests.get(url, headers=headers)
+		response.raise_for_status() # r.status_code == requests.codes.ok
 		return response.json()
 
 	@classmethod
@@ -45,6 +46,7 @@ class Job:
 		url = f'{API_URL}/jobs/{uuid}'
 		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
 		response = requests.delete(url, headers=headers)
+		response.raise_for_status() # r.status_code == requests.codes.ok
 		return response.json()
 
 	# Triggers
