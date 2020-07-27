@@ -16,9 +16,9 @@ def after(hours=None, minutes=None, seconds=None):
 	return {
 		'name': 'after',
 		'kwargs': {
-			'hours': int(hours),
-			'minutes': int(minutes),
-			'seconds': int(seconds)
+			'hours': hours,
+			'minutes': minutes,
+			'seconds': seconds
 		}
 	}
 
@@ -26,9 +26,9 @@ def every(hours=None, minutes=None, seconds=None):
 	return {
 		'name': 'every',
 		'kwargs': {
-			'hours': int(hours),
-			'minutes': int(minutes),
-			'seconds': int(seconds)
+			'hours': hours,
+			'minutes': minutes,
+			'seconds': seconds
 		}
 	}
 
