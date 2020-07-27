@@ -3,23 +3,27 @@ import requests
 
 API_URL = os.getenv('CRONO_API_URL')
 API_KEY = os.getenv('CRONO_API_KEY')
-API_KEY_HEADER = 'X-API-Key'
 
 class Job:
 
+	headers = {'Authorization': f'Bearer {API_KEY}'}
+
 	def __init__(self, trigger=None, task=None):
-		self.headers = {API_KEY_HEADER: API_KEY}
 		self.trigger = trigger
 		self.task = task
-		self.uuid = None
+		self.sent = False
 
 	def send(self):
 
-		if self.uuid == None and self.task != None and self.trigger != None:
+		if self.sent == False and self.task != None and self.trigger != None:
 			url = f'{API_URL}/jobs'
 			json = {'task': self.task, 'trigger': self.trigger}
-			response = requests.post(url, headers=self.headers, json=json)
-			self.uuid = response.json()
+			response = requests.post(url, headers=Job.headers, json=json)
+
+			if response.status_code != requests.codes.ok:
+				return False
+
+			self.sent = True
 			return response.json()
 		
 		return self
@@ -29,26 +33,31 @@ class Job:
 	@classmethod
 	def jobs(cls):
 		url = f'{API_URL}/jobs'
-		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
-		response = requests.get(url, headers=headers)
+		response = requests.get(url, headers=Job.headers)
+
+		if response.status_code != requests.codes.ok:
+			return False
+		
 		return response.json()
 
 	@classmethod
 	def job(cls, uuid):
 		url = f'{API_URL}/jobs/{uuid}'
-		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
-		response = requests.get(url, headers=headers)
-		# r.status_code == requests.codes.ok
-		response.raise_for_status()
-		return response.json()
+		response = requests.get(url, headers=Job.headers)
+		
+		if response.status_code != requests.codes.ok:
+			return False
+
+		return response.json()		
 
 	@classmethod
 	def delete(cls, uuid):
 		url = f'{API_URL}/jobs/{uuid}'
-		headers = {API_KEY_HEADER: API_KEY} # TODO cls.headers?
-		response = requests.delete(url, headers=headers)
-		# r.status_code == requests.codes.ok
-		response.raise_for_status()
+		response = requests.delete(url, headers=Job.headers)
+
+		if response.status_code != requests.codes.ok
+			return False
+		
 		return response.json()
 
 	# Tasks
