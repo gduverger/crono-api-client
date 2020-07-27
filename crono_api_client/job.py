@@ -57,7 +57,7 @@ class Job:
 		url = f'{API_URL}/jobs/{uuid}'
 		response = requests.delete(url, headers=Job.headers)
 
-		if response.status_code != requests.codes.ok
+		if response.status_code != requests.codes.ok:
 			return False
 		
 		return response.json()
