@@ -1,6 +1,8 @@
 import os
 import requests
 
+from crono_api_client import utils
+
 API_URL = os.getenv('CRONO_API_URL')
 API_KEY = os.getenv('CRONO_API_KEY')
 
@@ -17,7 +19,8 @@ class Job:
 
 		if self.sent == False and self.task != None and self.trigger != None:
 			url = f'{API_URL}/jobs'
-			json = {'task': self.task, 'trigger': self.trigger}
+			trigger = json.dumps(self.trigger, default=utils.encode_datetime)
+			json = {'task': self.task, 'trigger': trigger}
 			response = requests.post(url, headers=Job.headers, json=json)
 
 			if response.status_code != requests.codes.ok:
