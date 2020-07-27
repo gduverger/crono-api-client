@@ -1,4 +1,5 @@
 from crono_api_client import job as _job
+from crono_api_client import triggers
 
 # Jobs
 
@@ -27,17 +28,18 @@ def email(*args, **kwargs):
 
 # Triggers
 
-def on(*args, **kwargs):
-	return _job.Job(trigger={'name': 'on', 'args': args, 'kwargs': kwargs})
+def on(datetime_):
+	trigger = triggers.on(datetime_)
+	return _job.Job(trigger=trigger)
 
-def after(*args, **kwargs):
-	return _job.Job(trigger={'name': 'after', 'args': args, 'kwargs': kwargs})
+def after(hours=None, minutes=None, seconds=None):
+	trigger = triggers.after(hours=hours, minutes=minutes, seconds=seconds)
+	return _job.Job(trigger=trigger)
 
-def every(*args, **kwargs):
-	return _job.Job(trigger={'name': 'every', 'args': args, 'kwargs': kwargs})
+def every(hours=None, minutes=None, seconds=None):
+	trigger = triggers.every(hours=hours, minutes=minutes, seconds=seconds)
+	return _job.Job(trigger=trigger)
 
-def cron(*args, **kwargs):
-	return _job.Job(trigger={'name': 'cron', 'args': args, 'kwargs': kwargs})
-
-def at(*args, **kwargs):
-	raise Exception('Not implemented yet')
+def cron(expression):
+	trigger = triggers.cron(expression)
+	return _job.Job(trigger=trigger)

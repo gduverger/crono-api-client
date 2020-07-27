@@ -19,8 +19,7 @@ class Job:
 
 		if self.sent == False and self.task != None and self.trigger != None:
 			url = f'{API_URL}/jobs'
-			trigger = json.dumps(self.trigger, default=utils.encode_datetime)
-			json = {'task': self.task, 'trigger': trigger}
+			json = {'task': self.task, 'trigger': self.trigger}
 			response = requests.post(url, headers=Job.headers, json=json)
 
 			if response.status_code != requests.codes.ok:
@@ -83,21 +82,18 @@ class Job:
 
 	# Triggers
 
-	def on(self, *args, **kwargs):
-		self.trigger = {'name': 'on', 'args': args, 'kwargs': kwargs}
+	def on(self, datetime_):
+		self.trigger = triggers.on(datetime_)
 		return self.send()
 
-	def after(self, *args, **kwargs):
-		self.trigger = {'name': 'after', 'args': args, 'kwargs': kwargs}
+	def after(self, hours=None, minutes=None, seconds=None):
+		self.trigger = triggers.after(hours=hours, minutes=minutes, seconds=seconds)
 		return self.send()
 
-	def every(self, *args, **kwargs):
-		self.trigger = {'name': 'every', 'args': args, 'kwargs': kwargs}
+	def every(self, hours=None, minutes=None, seconds=None):
+		self.trigger = triggers.every(hours=hours, minutes=minutes, seconds=seconds)
 		return self.send()
 
-	def cron(self, *args, **kwargs):
-		self.trigger = {'name': 'cron', 'args': args, 'kwargs': kwargs}
+	def cron(self, expression):
+		self.trigger = triggers.cron(expression)
 		return self.send()
-
-	def at(self, *args, **kwargs):
-		raise Exception('Not implemented yet')
