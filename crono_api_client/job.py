@@ -97,5 +97,4 @@ class Job:
 		return self.send()
 
 	def at(self, *args, **kwargs):
-		self.trigger = {'name': 'at', 'args': args, 'kwargs': kwargs}
-		return self.send()
+		raise Exception('Not implemented yet')

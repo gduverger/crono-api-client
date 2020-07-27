@@ -40,4 +40,4 @@ def cron(*args, **kwargs):
 	return _job.Job(trigger={'name': 'cron', 'args': args, 'kwargs': kwargs})
 
 def at(*args, **kwargs):
-	return _job.Job(trigger={'name': 'at', 'args': args, 'kwargs': kwargs})
+	raise Exception('Not implemented yet')
