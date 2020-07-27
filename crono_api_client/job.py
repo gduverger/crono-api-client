@@ -1,6 +1,8 @@
 import os
 import requests
 
+from crono_api_client import triggers
+
 API_URL = os.getenv('CRONO_API_URL')
 API_KEY = os.getenv('CRONO_API_KEY')
 
